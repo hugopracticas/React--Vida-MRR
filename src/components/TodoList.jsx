@@ -31,6 +31,14 @@ export const TodoList = () => {
     console.log(taskList);
   };
 
+  const fakeFunction = () => {
+    console.log("fakefunction");
+  };
+
+  const fakeFunction2 = () => {
+    console.log("fakefunction2");
+  };
+
   return (
     <div>
       <form onSubmit={handleonSubmit}>

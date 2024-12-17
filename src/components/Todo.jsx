@@ -16,6 +16,10 @@ export const Todo = ({ task, updateValue }) => {
       setIsEdit(false);
     };
 
+    const onFacke = () => {
+      console.log("");
+    };
+
     return (
       <div>
         <form>
