@@ -31,6 +31,12 @@ export const TodoList = () => {
     console.log(taskList);
   };
 
+  const deleteTask = (id) => {
+    const newTaskList = [...taskList];
+    const filterTask = newTaskList.filter((task) => task.id !== id);
+    setTaskList(filterTask);
+  };
+
   const fakeFunction = () => {
     console.log("fakefunction");
   };
@@ -47,7 +53,12 @@ export const TodoList = () => {
       </form>
       <div>
         {taskList.map((task) => (
-          <Todo key={task.id} task={task} updateValue={updateValue} />
+          <Todo
+            key={task.id}
+            task={task}
+            updateValue={updateValue}
+            deleteTask={deleteTask}
+          />
         ))}
       </div>
     </div>

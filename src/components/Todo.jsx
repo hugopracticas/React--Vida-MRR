@@ -1,8 +1,12 @@
 import { useState } from "react";
 
-export const Todo = ({ task, updateValue }) => {
+export const Todo = ({ task, updateValue, deleteTask }) => {
   const [isEdit, setIsEdit] = useState(false);
 
+  const onDeleteTask = () => {
+    deleteTask(task.id)
+  }
+  
   const EditForm = () => {
     const [updateVale, setUpdateValue] = useState(task.name);
 
@@ -36,7 +40,7 @@ export const Todo = ({ task, updateValue }) => {
       ) : (
         <div>
           {task.name}
-          <button>Delete</button>
+          <button onClick={onDeleteTask}>Delete</button>
           <button onClick={() => setIsEdit(true)}>Edit</button>
         </div>
       )}
