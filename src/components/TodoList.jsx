@@ -1,37 +1,51 @@
-import { useState } from "react"
+import { useState } from "react";
+import { Todo } from "./Todo";
 
 export const TodoList = () => {
+  const [task, setTask] = useState("");
+  const [repeat, setRepeat] = useState(false);
+  const [taskList, setTaskList] = useState([]);
 
-    const [task, setTask] = useState('')
-    const [repeat, setRepeat] = useState(false)
-    const [taskList, setTaskList] = useState([])
+  const handleChangeValue = (e) => {
+    const value = e.target.value;
+    setTask(value);
+  };
 
-    const handleChangeValue = (e) => {
-       const value = e.target.value
-       setTask(value)
-    }
+  const handleonSubmit = (e) => {
+    e.preventDefault();
 
-    const handleonSubmit = (e) => {
-        e.preventDefault()
-        const repeatTask = taskList.filter((tarea) => tarea === task)
-        console.log(repeatTask.length);
-        if(repeatTask.length === 1){
-            setRepeat(true)
-        }
-        setTaskList([...taskList, task])
-    }
+    const newTask = {
+      id: crypto.randomUUID(),
+      name: task,
+      complete: false,
+    };
+    setTaskList([...taskList, newTask]);
+    setTask("");
+  };
 
-    
+  const updateValue = (id, value) => {
+    const newTaskList = [...taskList];
+    const findValue = newTaskList.find((task) => task.id === id);
+    findValue.name = value;
+    setTaskList(newTaskList);
+    console.log(taskList);
+  };
 
-    return (
-        <div>
-            <form onSubmit={handleonSubmit}>
-                <input type="text" onChange={handleChangeValue} />
-                <input type="button" value='New Task' onClick={handleonSubmit}/>
-            </form>
-            <div>
-                {repeat ? 'ya tienes esta tarea' : 'puedes continuar' }
-            </div>
-        </div>
-    )
-}
+  return (
+    <div>
+      <form onSubmit={handleonSubmit}>
+        <input type="text" onChange={handleChangeValue} value={task} />
+        <input type="button" value="New Task" onClick={handleonSubmit} />
+      </form>
+      <div>
+        {taskList.map((task) => (
+          <Todo key={task.id} task={task} updateValue={updateValue} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+//l v 8:30 a 2 - 3 a 6
+
+//300;
